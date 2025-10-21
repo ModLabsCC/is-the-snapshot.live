@@ -26,7 +26,7 @@ $("[name=enable-sound]").change((el) => {
     localStorage.setItem("enable-sound",el.currentTarget.checked ? "checked" : "");
 });
 
-var url = "https://cors.flawcra.cc/?https://piston-meta.mojang.com/mc/game/version_manifest_v2.json";
+var url = "https://api.modlabs.cc/cors/?https://piston-meta.mojang.com/mc/game/version_manifest_v2.json";
 var live_sound = "/audio/snapshot_live.wav";
 var sound_on = "/audio/enable_sound.wav";
 var sound_off = "/audio/disable_sound.wav";
@@ -112,28 +112,28 @@ var show_buttons = async (snapshot_name) => {
     if(snapshot_regex.test(snapshot_name)) {
         var match = snapshot_regex.exec(snapshot_name);
         while(!match) match = snapshot_regex.exec(snapshot_name);
-        check_url(`https://cors.flawcra.cc/?https://www.minecraft.net/en-us/article/minecraft-snapshot-${match[0]}`, () => {
+        check_url(`https://api.modlabs.cc/cors/?https://www.minecraft.net/en-us/article/minecraft-snapshot-${match[0]}`, () => {
             add_button("View on Minecraft.net", `https://www.minecraft.net/en-us/article/minecraft-snapshot-${match[0]}`);
         });
-        check_url(`https://cors.flawcra.cc/?https://tis.codes/snapshots/${match[0]}`, () => {
+        check_url(`https://api.modlabs.cc/cors/?https://tis.codes/snapshots/${match[0]}`, () => {
             add_button("View on Tis", `https://tis.codes/snapshots/${match[0]}`);
         });
     } else if(pre_regex.test(snapshot_name)) {
         var match = pre_regex.exec(snapshot_name);
         while(!match) match = pre_regex.exec(snapshot_name);
-        check_url(`https://cors.flawcra.cc/?https://www.minecraft.net/en-us/article/minecraft-${match[1].replaceAll(".","-")}-pre-release-${match[3]}`, () => {
+        check_url(`https://api.modlabs.cc/cors/?https://www.minecraft.net/en-us/article/minecraft-${match[1].replaceAll(".","-")}-pre-release-${match[3]}`, () => {
             add_button("View on Minecraft.net", `https://www.minecraft.net/en-us/article/minecraft-${match[1].replaceAll(".","-")}-pre-release-${match[3]}`);
         });
-        check_url(`https://cors.flawcra.cc/?https://tis.codes/snapshots/${match[1].replaceAll(".","-")}-pre${match[3]}`, () => {
+        check_url(`https://api.modlabs.cc/cors/?https://tis.codes/snapshots/${match[1].replaceAll(".","-")}-pre${match[3]}`, () => {
             add_button("View on Tis", `https://tis.codes/snapshots/${match[1].replaceAll(".","-")}-pre${match[3]}`);
         });
     } else if(rc_regex.test(snapshot_name)) {
         var match = rc_regex.exec(snapshot_name);
         while(!match) match = rc_regex.exec(snapshot_name);
-        check_url(`https://cors.flawcra.cc/?https://www.minecraft.net/en-us/article/minecraft-${match[1].replaceAll(".","-")}-release-candidate-${match[3]}`, () => {
+        check_url(`https://api.modlabs.cc/cors/?https://www.minecraft.net/en-us/article/minecraft-${match[1].replaceAll(".","-")}-release-candidate-${match[3]}`, () => {
             add_button("View on Minecraft.net", `https://www.minecraft.net/en-us/article/minecraft-${match[1].replaceAll(".","-")}-release-candidate-${match[3]}`);
         });
-        check_url(`https://cors.flawcra.cc/?https://tis.codes/snapshots/${match[1].replaceAll(".","-")}-rc${match[3]}`, () => {
+        check_url(`https://api.modlabs.cc/cors/?https://tis.codes/snapshots/${match[1].replaceAll(".","-")}-rc${match[3]}`, () => {
             add_button("View on Tis", `https://tis.codes/snapshots/${match[1].replaceAll(".","-")}-rc${match[3]}`);
         });
     }
@@ -191,6 +191,7 @@ var check_url = async (url, on_success = null) => {
 }
 
 var is_phoenix_live = async () => {
-    let a = await fetch(`https://cors.flawcra.cc/?https://www.twitch.tv/phoenixsclive`);
+    let a = await fetch(`https://api.modlabs.cc/cors/?https://www.twitch.tv/phoenixsclive`);
     return (await a.text()).includes('isLiveBroadcast');
 }
+
